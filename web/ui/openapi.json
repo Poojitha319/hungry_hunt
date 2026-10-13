@@ -1,0 +1,1410 @@
+{
+ "openapi": "3.1.0",
+ "info": {
+  "title": "Hungry Hunt API",
+  "version": "0.1.0"
+ },
+ "paths": {
+  "/health": {
+   "get": {
+    "summary": "Health",
+    "operationId": "health_health_get",
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {}
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/digest": {
+   "get": {
+    "summary": "Get Digest",
+    "operationId": "get_digest_api_digest_get",
+    "parameters": [
+     {
+      "name": "days",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "integer",
+         "maximum": 90,
+         "minimum": 1
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Days"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/Digest"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/jobs/{job_id}": {
+   "get": {
+    "summary": "Get Job",
+    "operationId": "get_job_api_jobs__job_id__get",
+    "parameters": [
+     {
+      "name": "job_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Job Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/JobDetail"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/jobs/{job_id}/status": {
+   "post": {
+    "summary": "Set Status",
+    "operationId": "set_status_api_jobs__job_id__status_post",
+    "parameters": [
+     {
+      "name": "job_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Job Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/StatusIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/ApplicationOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/jobs/{job_id}/outreach": {
+   "post": {
+    "summary": "Draft Outreach",
+    "operationId": "draft_outreach_api_jobs__job_id__outreach_post",
+    "parameters": [
+     {
+      "name": "job_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Job Id"
+      }
+     },
+     {
+      "name": "regenerate",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "boolean",
+       "default": false,
+       "title": "Regenerate"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/OutreachResult"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   },
+   "get": {
+    "summary": "Get Outreach",
+    "operationId": "get_outreach_api_jobs__job_id__outreach_get",
+    "parameters": [
+     {
+      "name": "job_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Job Id"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/OutreachResult"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/companies": {
+   "get": {
+    "summary": "List Companies",
+    "operationId": "list_companies_api_companies_get",
+    "parameters": [
+     {
+      "name": "status",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "enum": [
+          "target",
+          "watch",
+          "avoid"
+         ],
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Status"
+      }
+     },
+     {
+      "name": "kind",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Kind"
+      }
+     },
+     {
+      "name": "tier",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Tier"
+      }
+     },
+     {
+      "name": "q",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "anyOf": [
+        {
+         "type": "string",
+         "maxLength": 100
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "title": "Q"
+      }
+     },
+     {
+      "name": "limit",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 5000,
+       "minimum": 1,
+       "default": 500,
+       "title": "Limit"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/CompanyOut"
+         },
+         "title": "Response List Companies Api Companies Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   },
+   "post": {
+    "summary": "Add Company",
+    "operationId": "add_company_api_companies_post",
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/CompanyAdd"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/CompanyOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/companies/{company_id}": {
+   "post": {
+    "summary": "Update Company",
+    "operationId": "update_company_api_companies__company_id__post",
+    "parameters": [
+     {
+      "name": "company_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer",
+       "title": "Company Id"
+      }
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/CompanyIn"
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/CompanyOut"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/api/coverage": {
+   "get": {
+    "summary": "Coverage",
+    "operationId": "coverage_api_coverage_get",
+    "parameters": [
+     {
+      "name": "days",
+      "in": "query",
+      "required": false,
+      "schema": {
+       "type": "integer",
+       "maximum": 180,
+       "minimum": 1,
+       "default": 7,
+       "title": "Days"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Successful Response",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "array",
+         "items": {
+          "$ref": "#/components/schemas/RunOut"
+         },
+         "title": "Response Coverage Api Coverage Get"
+        }
+       }
+      }
+     },
+     "422": {
+      "description": "Validation Error",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/HTTPValidationError"
+        }
+       }
+      }
+     }
+    }
+   }
+  }
+ },
+ "components": {
+  "schemas": {
+   "ApplicationOut": {
+    "properties": {
+     "job_id": {
+      "type": "integer",
+      "title": "Job Id"
+     },
+     "status": {
+      "type": "string",
+      "title": "Status"
+     },
+     "applied_at": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date-time"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Applied At"
+     },
+     "notes": {
+      "type": "string",
+      "title": "Notes"
+     },
+     "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Updated At"
+     }
+    },
+    "type": "object",
+    "required": [
+     "job_id",
+     "status",
+     "applied_at",
+     "notes",
+     "updated_at"
+    ],
+    "title": "ApplicationOut"
+   },
+   "AssessmentOut": {
+    "properties": {
+     "passed_rules": {
+      "type": "boolean",
+      "title": "Passed Rules"
+     },
+     "rule_fails": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Rule Fails"
+     },
+     "min_years": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Min Years"
+     },
+     "max_years": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Max Years"
+     },
+     "years_evidence": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Years Evidence"
+     },
+     "fit_score": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Fit Score"
+     },
+     "matched_skills": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Matched Skills"
+     },
+     "missing_skills": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Missing Skills"
+     },
+     "verdict": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Verdict"
+     },
+     "reason": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Reason"
+     }
+    },
+    "type": "object",
+    "required": [
+     "passed_rules",
+     "rule_fails",
+     "min_years",
+     "max_years",
+     "years_evidence",
+     "fit_score",
+     "matched_skills",
+     "missing_skills",
+     "verdict",
+     "reason"
+    ],
+    "title": "AssessmentOut"
+   },
+   "CompanyAdd": {
+    "properties": {
+     "status": {
+      "anyOf": [
+       {
+        "type": "string",
+        "enum": [
+         "target",
+         "watch",
+         "avoid"
+        ]
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Status"
+     },
+     "notes": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Notes"
+     },
+     "text": {
+      "type": "string",
+      "maxLength": 1024,
+      "minLength": 1,
+      "title": "Text"
+     }
+    },
+    "type": "object",
+    "required": [
+     "text"
+    ],
+    "title": "CompanyAdd"
+   },
+   "CompanyIn": {
+    "properties": {
+     "status": {
+      "anyOf": [
+       {
+        "type": "string",
+        "enum": [
+         "target",
+         "watch",
+         "avoid"
+        ]
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Status"
+     },
+     "notes": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Notes"
+     }
+    },
+    "type": "object",
+    "title": "CompanyIn"
+   },
+   "CompanyOut": {
+    "properties": {
+     "id": {
+      "type": "integer",
+      "title": "Id"
+     },
+     "name": {
+      "type": "string",
+      "title": "Name"
+     },
+     "ats": {
+      "type": "string",
+      "title": "Ats"
+     },
+     "slug": {
+      "type": "string",
+      "title": "Slug"
+     },
+     "board_url": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Board Url"
+     },
+     "kind": {
+      "type": "string",
+      "title": "Kind"
+     },
+     "tier": {
+      "type": "string",
+      "title": "Tier"
+     },
+     "status": {
+      "type": "string",
+      "title": "Status"
+     },
+     "notes": {
+      "type": "string",
+      "title": "Notes"
+     },
+     "last_ok": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date-time"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Last Ok"
+     },
+     "fail_count": {
+      "type": "integer",
+      "title": "Fail Count"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "name",
+     "ats",
+     "slug",
+     "board_url",
+     "kind",
+     "tier",
+     "status",
+     "notes",
+     "last_ok",
+     "fail_count"
+    ],
+    "title": "CompanyOut"
+   },
+   "Coverage": {
+    "properties": {
+     "boards_total": {
+      "type": "integer",
+      "title": "Boards Total",
+      "default": 0
+     },
+     "boards_ok": {
+      "type": "integer",
+      "title": "Boards Ok",
+      "default": 0
+     },
+     "boards_failed": {
+      "type": "integer",
+      "title": "Boards Failed",
+      "default": 0
+     },
+     "boards_skipped": {
+      "type": "integer",
+      "title": "Boards Skipped",
+      "default": 0
+     },
+     "jobs_seen": {
+      "type": "integer",
+      "title": "Jobs Seen",
+      "default": 0
+     },
+     "jobs_stored": {
+      "type": "integer",
+      "title": "Jobs Stored",
+      "default": 0
+     },
+     "jobs_new": {
+      "type": "integer",
+      "title": "Jobs New",
+      "default": 0
+     },
+     "jobs_closed": {
+      "type": "integer",
+      "title": "Jobs Closed",
+      "default": 0
+     },
+     "descriptions_fetched": {
+      "type": "integer",
+      "title": "Descriptions Fetched",
+      "default": 0
+     },
+     "rules_passed": {
+      "type": "integer",
+      "title": "Rules Passed",
+      "default": 0
+     },
+     "gemini_calls": {
+      "type": "integer",
+      "title": "Gemini Calls",
+      "default": 0
+     },
+     "unscored": {
+      "type": "integer",
+      "title": "Unscored",
+      "default": 0
+     },
+     "quota_hit": {
+      "type": "boolean",
+      "title": "Quota Hit",
+      "default": false
+     },
+     "blind_spots": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Blind Spots",
+      "default": []
+     },
+     "stale_targets": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Stale Targets",
+      "default": []
+     },
+     "lever_boards": {
+      "type": "integer",
+      "title": "Lever Boards",
+      "default": 0
+     },
+     "service_auto": {
+      "type": "integer",
+      "title": "Service Auto",
+      "default": 0
+     },
+     "stale_hidden": {
+      "type": "integer",
+      "title": "Stale Hidden",
+      "default": 0
+     },
+     "funded_unwatched": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Funded Unwatched",
+      "default": []
+     },
+     "stats_available": {
+      "type": "boolean",
+      "title": "Stats Available",
+      "default": true
+     },
+     "errors": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Errors",
+      "default": []
+     }
+    },
+    "type": "object",
+    "title": "Coverage"
+   },
+   "Digest": {
+    "properties": {
+     "digest_id": {
+      "type": "string",
+      "title": "Digest Id"
+     },
+     "date_ist": {
+      "type": "string",
+      "format": "date",
+      "title": "Date Ist"
+     },
+     "new": {
+      "additionalProperties": {
+       "items": {
+        "$ref": "#/components/schemas/DigestJob"
+       },
+       "type": "array"
+      },
+      "type": "object",
+      "title": "New"
+     },
+     "carried": {
+      "additionalProperties": {
+       "items": {
+        "$ref": "#/components/schemas/DigestJob"
+       },
+       "type": "array"
+      },
+      "type": "object",
+      "title": "Carried"
+     },
+     "unscored": {
+      "items": {
+       "$ref": "#/components/schemas/DigestJob"
+      },
+      "type": "array",
+      "title": "Unscored"
+     },
+     "coverage": {
+      "$ref": "#/components/schemas/Coverage"
+     },
+     "truncated": {
+      "type": "integer",
+      "title": "Truncated",
+      "default": 0
+     },
+     "pipeline": {
+      "additionalProperties": {
+       "additionalProperties": {
+        "type": "integer"
+       },
+       "type": "object"
+      },
+      "type": "object",
+      "title": "Pipeline",
+      "default": {}
+     }
+    },
+    "type": "object",
+    "required": [
+     "digest_id",
+     "date_ist",
+     "new",
+     "carried",
+     "unscored",
+     "coverage"
+    ],
+    "title": "Digest"
+   },
+   "DigestJob": {
+    "properties": {
+     "job_id": {
+      "type": "integer",
+      "title": "Job Id"
+     },
+     "company": {
+      "type": "string",
+      "title": "Company"
+     },
+     "tier": {
+      "type": "string",
+      "title": "Tier"
+     },
+     "title": {
+      "type": "string",
+      "title": "Title"
+     },
+     "location_raw": {
+      "type": "string",
+      "title": "Location Raw"
+     },
+     "posted_age_days": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Posted Age Days"
+     },
+     "score": {
+      "anyOf": [
+       {
+        "type": "integer"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Score"
+     },
+     "verdict": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Verdict"
+     },
+     "reason": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Reason"
+     },
+     "years_evidence": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Years Evidence"
+     },
+     "url": {
+      "type": "string",
+      "title": "Url"
+     },
+     "review_url": {
+      "type": "string",
+      "title": "Review Url"
+     },
+     "is_new": {
+      "type": "boolean",
+      "title": "Is New"
+     },
+     "company_velocity": {
+      "type": "integer",
+      "title": "Company Velocity",
+      "default": 0
+     },
+     "recently_funded": {
+      "type": "boolean",
+      "title": "Recently Funded",
+      "default": false
+     },
+     "breakdown": {
+      "anyOf": [
+       {
+        "additionalProperties": true,
+        "type": "object"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Breakdown"
+     }
+    },
+    "type": "object",
+    "required": [
+     "job_id",
+     "company",
+     "tier",
+     "title",
+     "location_raw",
+     "posted_age_days",
+     "score",
+     "verdict",
+     "reason",
+     "years_evidence",
+     "url",
+     "review_url",
+     "is_new"
+    ],
+    "title": "DigestJob"
+   },
+   "HTTPValidationError": {
+    "properties": {
+     "detail": {
+      "items": {
+       "$ref": "#/components/schemas/ValidationError"
+      },
+      "type": "array",
+      "title": "Detail"
+     }
+    },
+    "type": "object",
+    "title": "HTTPValidationError"
+   },
+   "JobDetail": {
+    "properties": {
+     "job": {
+      "$ref": "#/components/schemas/JobOut"
+     },
+     "company": {
+      "$ref": "#/components/schemas/CompanyOut"
+     },
+     "assessment": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/AssessmentOut"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "application": {
+      "anyOf": [
+       {
+        "$ref": "#/components/schemas/ApplicationOut"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     }
+    },
+    "type": "object",
+    "required": [
+     "job",
+     "company",
+     "assessment",
+     "application"
+    ],
+    "title": "JobDetail"
+   },
+   "JobOut": {
+    "properties": {
+     "id": {
+      "type": "integer",
+      "title": "Id"
+     },
+     "title": {
+      "type": "string",
+      "title": "Title"
+     },
+     "location_raw": {
+      "type": "string",
+      "title": "Location Raw"
+     },
+     "url": {
+      "type": "string",
+      "title": "Url"
+     },
+     "posted_at": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date-time"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Posted At"
+     },
+     "first_seen": {
+      "type": "string",
+      "format": "date-time",
+      "title": "First Seen"
+     },
+     "closed_at": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date-time"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Closed At"
+     },
+     "description": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Description"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "title",
+     "location_raw",
+     "url",
+     "posted_at",
+     "first_seen",
+     "closed_at",
+     "description"
+    ],
+    "title": "JobOut"
+   },
+   "OutreachResult": {
+    "properties": {
+     "subject": {
+      "type": "string",
+      "title": "Subject"
+     },
+     "note": {
+      "type": "string",
+      "title": "Note"
+     },
+     "referral_ask": {
+      "type": "string",
+      "title": "Referral Ask"
+     },
+     "who_to_contact": {
+      "type": "string",
+      "title": "Who To Contact"
+     },
+     "flags": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array",
+      "title": "Flags",
+      "default": []
+     },
+     "created_at": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date-time"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Created At"
+     }
+    },
+    "type": "object",
+    "required": [
+     "subject",
+     "note",
+     "referral_ask",
+     "who_to_contact"
+    ],
+    "title": "OutreachResult"
+   },
+   "RunOut": {
+    "properties": {
+     "id": {
+      "type": "integer",
+      "title": "Id"
+     },
+     "stage": {
+      "type": "string",
+      "title": "Stage"
+     },
+     "started_at": {
+      "type": "string",
+      "format": "date-time",
+      "title": "Started At"
+     },
+     "finished_at": {
+      "anyOf": [
+       {
+        "type": "string",
+        "format": "date-time"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Finished At"
+     },
+     "stats": {
+      "additionalProperties": true,
+      "type": "object",
+      "title": "Stats"
+     }
+    },
+    "type": "object",
+    "required": [
+     "id",
+     "stage",
+     "started_at",
+     "finished_at",
+     "stats"
+    ],
+    "title": "RunOut"
+   },
+   "StatusIn": {
+    "properties": {
+     "status": {
+      "type": "string",
+      "enum": [
+       "applied",
+       "callback",
+       "test",
+       "interview",
+       "rejected",
+       "skipped"
+      ],
+      "title": "Status"
+     },
+     "notes": {
+      "anyOf": [
+       {
+        "type": "string"
+       },
+       {
+        "type": "null"
+       }
+      ],
+      "title": "Notes"
+     }
+    },
+    "type": "object",
+    "required": [
+     "status"
+    ],
+    "title": "StatusIn"
+   },
+   "ValidationError": {
+    "properties": {
+     "loc": {
+      "items": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "integer"
+        }
+       ]
+      },
+      "type": "array",
+      "title": "Location"
+     },
+     "msg": {
+      "type": "string",
+      "title": "Message"
+     },
+     "type": {
+      "type": "string",
+      "title": "Error Type"
+     },
+     "input": {
+      "title": "Input"
+     },
+     "ctx": {
+      "type": "object",
+      "title": "Context"
+     }
+    },
+    "type": "object",
+    "required": [
+     "loc",
+     "msg",
+     "type"
+    ],
+    "title": "ValidationError"
+   }
+  }
+ }
+}
