@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: hungry-hunt-api
+    runtime: python
+    plan: free
+    buildCommand: pip install .
+    startCommand: uvicorn web.api.app:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12.7"
+      - key: DATABASE_URL
+        sync: false
+      - key: REVIEW_TOKEN
+        sync: false
+      - key: REVIEW_BASE_URL
+        sync: false
+      - key: USER_ID
+        value: poojitha

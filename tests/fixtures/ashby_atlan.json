@@ -1,0 +1,72 @@
+{
+ "jobs": [
+  {
+   "id": "254c1250-953b-4323-8d18-9fe5e41d8d7d",
+   "title": "Senior Security Engineer - Corporate Security",
+   "department": "IT & Security",
+   "team": "Security",
+   "employmentType": "FullTime",
+   "location": "India",
+   "secondaryLocations": [],
+   "publishedAt": "2026-07-24T11:33:47.990+00:00",
+   "isListed": true,
+   "isRemote": true,
+   "workplaceType": "Remote",
+   "address": {
+    "postalAddress": {
+     "addressCountry": "India"
+    }
+   },
+   "jobUrl": "https://jobs.ashbyhq.com/atlan/254c1250-953b-4323-8d18-9fe5e41d8d7d",
+   "applyUrl": "https://jobs.ashbyhq.com/atlan/254c1250-953b-4323-8d18-9fe5e41d8d7d/application",
+   "descriptionHtml": "",
+   "descriptionPlain": "WHO WE ARE\n\nAtlan is building the context layer for enterprise AI. Enterprises are pouring money into AI and most of it dies in production because the AI does not understand the business context around the data. That is the problem Atlan solves.\n\nGartner has named context the defining issue in enterprise AI, and calls context graphs the essential infrastructure for AI agents, naming Atlan one of three vendors already building it. We are also the only vendor named a Leader across all four major Gartner and Forrester evaluations for data catalogs, data governance and metadata management, the fou"
+  },
+  {
+   "id": "945193fe-b746-49e1-8843-2d1358314ec5",
+   "title": "Enterprise Account Executive - West",
+   "department": "Sales",
+   "team": "Account Executives",
+   "employmentType": "FullTime",
+   "location": "California",
+   "secondaryLocations": [],
+   "publishedAt": "2026-09-07T13:25:11.838+00:00",
+   "isListed": true,
+   "isRemote": true,
+   "workplaceType": "Remote",
+   "address": {
+    "postalAddress": {
+     "addressRegion": "California",
+     "addressCountry": "United States"
+    }
+   },
+   "jobUrl": "https://jobs.ashbyhq.com/atlan/945193fe-b746-49e1-8843-2d1358314ec5",
+   "applyUrl": "https://jobs.ashbyhq.com/atlan/945193fe-b746-49e1-8843-2d1358314ec5/application",
+   "descriptionHtml": "",
+   "descriptionPlain": "WHO WE ARE\n\nAtlan is building the context layer for enterprise AI. Enterprises are pouring money into AI and most of it dies in production because the AI does not understand the business context around the data. That is the problem Atlan solves.\n\nGartner has named context the defining issue in enterprise AI, and calls context graphs the essential infrastructure for AI agents, naming Atlan one of three vendors already building it. We are also the only vendor named a Leader across all four major Gartner and Forrester evaluations for data catalogs, data governance and metadata management, the fou"
+  },
+  {
+   "id": "8e3252f6-90fc-4ec5-abb7-6363df2df55a",
+   "title": "Business Development Representative",
+   "department": "Marketing",
+   "team": "Growth Marketing",
+   "employmentType": "FullTime",
+   "location": "India",
+   "secondaryLocations": [],
+   "publishedAt": "2026-06-04T15:06:31.440+00:00",
+   "isListed": true,
+   "isRemote": true,
+   "workplaceType": "Remote",
+   "address": {
+    "postalAddress": {
+     "addressCountry": "India"
+    }
+   },
+   "jobUrl": "https://jobs.ashbyhq.com/atlan/8e3252f6-90fc-4ec5-abb7-6363df2df55a",
+   "applyUrl": "https://jobs.ashbyhq.com/atlan/8e3252f6-90fc-4ec5-abb7-6363df2df55a/application",
+   "descriptionHtml": "",
+   "descriptionPlain": "WHO WE ARE\n\nAtlan is building the context layer for enterprise AI. Enterprises are pouring money into AI and most of it dies in production because the AI does not understand the business context around the data. That is the problem Atlan solves.\n\nGartner has named context the defining issue in enterprise AI, and calls context graphs the essential infrastructure for AI agents, naming Atlan one of three vendors already building it. We are also the only vendor named a Leader across all four major Gartner and Forrester evaluations for data catalogs, data governance and metadata management, the fou"
+  }
+ ],
+ "apiVersion": "1"
+}

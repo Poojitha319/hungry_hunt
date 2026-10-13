@@ -1,0 +1,34 @@
+{
+ "title": "Workable",
+ "totalSize": 4,
+ "nextPageToken": null,
+ "jobs": [
+  {
+   "id": "53e0b933-d51c-4330-9208-1aba5db6312d",
+   "title": "Senior Assistant",
+   "state": "published",
+   "description": "<p>Responsible for coordinating vessel provisioning activities for an assigned fleet segment, ensuring timely procurement, economical sourcing, vendor coordinat",
+   "requirementsSection": "<p><strong>KEY SKILLS AND CAPABILITIES:</strong><br /><strong>Technical Skills </strong></p><p>\u2022 Procurement &amp; Supply Coordination </p><p>\u2022 RFQ &amp; Cost A",
+   "benefitsSection": "<p>About Anglo-Eastern\u00a0</p><p>Anglo-Eastern is a global leader in independent ship management services. The Group manages over 700 vessels under full technical ",
+   "url": "https://jobs.workable.com/view/bmJWpeQBV4MjyjtfpuyYC6/senior-assistant-in-navi-mumbai-at-anglo-eastern-ship-management",
+   "locations": [
+    "Navi Mumbai, Maharashtra, India"
+   ],
+   "location": {
+    "city": "Navi Mumbai",
+    "subregion": "Maharashtra",
+    "countryName": "India"
+   },
+   "created": "2026-10-13T09:39:31.429Z",
+   "updated": "2026-10-13T09:39:31.429Z",
+   "workplace": "on_site",
+   "employmentType": "Full-time",
+   "company": {
+    "id": "83332852-8ad1-4124-b8c1-d54ff1f50053",
+    "title": "Anglo-Eastern Ship Management",
+    "website": "https://www.angloeastern.com/",
+    "url": "https://jobs.workable.com/company/hcExVhiGnTGDbkpHaDeafK/jobs-at-anglo-eastern-ship-management"
+   }
+  }
+ ]
+}

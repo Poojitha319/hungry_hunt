@@ -1,0 +1,88 @@
+{
+ "title": "Workable",
+ "totalSize": 4,
+ "nextPageToken": "tok2",
+ "jobs": [
+  {
+   "id": "712ae116-6833-4da7-938b-08cafe787240",
+   "title": "Senior Software Engineer - Backend",
+   "state": "published",
+   "description": "<p><strong>About\u00a0Apna</strong></p><p>Since 2019, apna has connected over 60 million jobseekers with more than 250,000 enterprises and small business across Indi",
+   "requirementsSection": "<p><strong>Key Responsibilities:</strong></p><ul><li>Design, develop, and maintain <strong>scalable and high-performance backend services</strong> using Golang.",
+   "benefitsSection": "",
+   "url": "https://jobs.workable.com/view/eYvU7f65JQW4XapSeJCNpS/senior-software-engineer---backend-in-bengaluru-at-apna",
+   "locations": [
+    "Bengaluru, Karnataka, India"
+   ],
+   "location": {
+    "city": "Bengaluru",
+    "subregion": "Karnataka",
+    "countryName": "India"
+   },
+   "created": "2026-10-13T10:36:21.255Z",
+   "updated": "2026-10-13T10:36:21.255Z",
+   "workplace": "on_site",
+   "employmentType": "",
+   "company": {
+    "id": "b7c615d2-3982-4e8d-8e33-bb53f501c869",
+    "title": "Apna",
+    "website": "https://apna.co",
+    "url": "https://jobs.workable.com/company/oGcPwdAqKGbezdH7GyyVKX/jobs-at-apna"
+   }
+  },
+  {
+   "id": "8b1cf318-8b5c-4a1a-b037-7038fe1f59ae",
+   "title": "Senior Assistant",
+   "state": "published",
+   "description": "<p>Responsible for coordinating vessel provisioning activities for an assigned fleet segment, ensuring timely procurement, economical sourcing, vendor coordinat",
+   "requirementsSection": "<p><strong>KEY SKILLS AND CAPABILITIES:</strong><br /><strong>Technical Skills </strong></p><p>\u2022 Procurement &amp; Supply Coordination </p><p>\u2022 RFQ &amp; Cost A",
+   "benefitsSection": "<p>About Anglo-Eastern\u00a0</p><p>Anglo-Eastern is a global leader in independent ship management services. The Group manages over 700 vessels under full technical ",
+   "url": "https://jobs.workable.com/view/ibkHVRSWaNKawJjUjbaGn5/senior-assistant-in-navi-mumbai-at-anglo-eastern-ship-management",
+   "locations": [
+    "Navi Mumbai, Maharashtra, India"
+   ],
+   "location": {
+    "city": "Navi Mumbai",
+    "subregion": "Maharashtra",
+    "countryName": "India"
+   },
+   "created": "2026-10-13T09:52:34.679Z",
+   "updated": "2026-10-13T09:52:34.679Z",
+   "workplace": "on_site",
+   "employmentType": "Full-time",
+   "company": {
+    "id": "b7c615d2-3982-4e8d-8e33-bb53f501c869",
+    "title": "Apna",
+    "website": "https://apna.co",
+    "url": "https://jobs.workable.com/company/oGcPwdAqKGbezdH7GyyVKX/jobs-at-apna"
+   }
+  },
+  {
+   "id": "e4fa48d3-3da5-4db5-ba96-b61c903780e0",
+   "title": "Senior Assistant",
+   "state": "published",
+   "description": "<p>Responsible for coordinating vessel provisioning activities for an assigned fleet segment, ensuring timely procurement, economical sourcing, vendor coordinat",
+   "requirementsSection": "<p><strong>KEY SKILLS AND CAPABILITIES:</strong><br /><strong>Technical Skills </strong></p><p>\u2022 Procurement &amp; Supply Coordination </p><p>\u2022 RFQ &amp; Cost A",
+   "benefitsSection": "<p>About Anglo-Eastern\u00a0</p><p>Anglo-Eastern is a global leader in independent ship management services. The Group manages over 700 vessels under full technical ",
+   "url": "https://jobs.workable.com/view/ugXyZc5Utyp1TxiRooqyhy/senior-assistant-in-navi-mumbai-at-anglo-eastern-ship-management",
+   "locations": [
+    "Navi Mumbai, Maharashtra, India"
+   ],
+   "location": {
+    "city": "Navi Mumbai",
+    "subregion": "Maharashtra",
+    "countryName": "India"
+   },
+   "created": "2026-10-13T09:43:32.442Z",
+   "updated": "2026-10-13T09:43:32.442Z",
+   "workplace": "on_site",
+   "employmentType": "Full-time",
+   "company": {
+    "id": "83332852-8ad1-4124-b8c1-d54ff1f50053",
+    "title": "Anglo-Eastern Ship Management",
+    "website": "https://www.angloeastern.com/",
+    "url": "https://jobs.workable.com/company/hcExVhiGnTGDbkpHaDeafK/jobs-at-anglo-eastern-ship-management"
+   }
+  }
+ ]
+}

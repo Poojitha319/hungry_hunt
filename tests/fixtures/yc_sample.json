@@ -1,0 +1,5 @@
+[{"name": "Razorpay", "slug": "razorpay", "website": "https://razorpay.com", "all_locations": "Bengaluru, Karnataka, India", "team_size": 3000, "status": "Active", "batch": "Winter 2015", "regions": ["India"], "one_liner": "Payments"},
+ {"name": "Hevo Data", "slug": "hevo-data", "website": "https://hevodata.com", "all_locations": "Bengaluru, India; San Francisco", "team_size": 180, "status": "Active", "batch": "Winter 2017", "regions": ["India", "United States"], "one_liner": "Data pipelines"},
+ {"name": "Atlan", "slug": "atlan", "website": "https://atlan.com", "all_locations": "New Delhi, India", "team_size": 400, "status": "Active", "batch": "Winter 2015", "regions": ["India"]},
+ {"name": "Dead Co", "slug": "dead-co", "website": "https://dead.example", "all_locations": "Bengaluru", "team_size": 10, "status": "Inactive", "batch": "Summer 2019", "regions": ["India"]},
+ {"name": "Stripe", "slug": "stripe", "website": "https://stripe.com", "all_locations": "San Francisco", "team_size": 8000, "status": "Active", "batch": "Summer 2009", "regions": ["United States"]}]

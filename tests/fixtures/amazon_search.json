@@ -1,0 +1,35 @@
+{
+ "hits": 2379,
+ "jobs": [
+  {
+   "basic_qualifications": "- 3+ years of data engineering experience<br/>- Experience with SQL<br/>- Experience with data modeling, warehousing and building ETL pipelines<br/>- Experience in at least one modern scripting or pro",
+   "city": "Bengaluru",
+   "country_code": "IND",
+   "description": "Amazon IN Platform Development team is looking to hire a rock star Data/BI Engineer to build for pan Amazon India businesses. <br/><br/>Amazon India is at the core of hustle @ Amazon WW today and the ",
+   "id": "3c4a197b-b3fd-4030-93f7-bca5b9696cc6",
+   "id_icims": "10576634",
+   "job_category": "Software Development",
+   "job_path": "/en/jobs/10576634/data-engineer-in-data-engineering-analytics",
+   "location": "IN, KA, Bengaluru",
+   "normalized_location": "Bengaluru, Karnataka, IND",
+   "posted_date": "October 13, 2026",
+   "preferred_qualifications": "- Experience with AWS technologies like Redshift, S3, AWS Glue, EMR, Kinesis, FireHose, Lambda, and IAM roles and permissions<br/>- Experience with big data technologies such as: Hadoop, Hive, Spark, ",
+   "title": "Data Engineer, IN Data Engineering & Analytics"
+  },
+  {
+   "basic_qualifications": "- Bachelor's degree",
+   "city": "Chennai - Virtual",
+   "country_code": "IND",
+   "description": "\u202fAmazon Robotics develops state-of-the art robotics for Amazon\u2019s Fulfillment Centers. Come build the future of human-technology interaction with us. We are combining computer vision, mobile robots, ad",
+   "id": "a166169a-369b-46af-823d-368f49f20bef",
+   "id_icims": "10576655",
+   "job_category": "Applied Science",
+   "job_path": "/en/jobs/10576655/associate-ml-data-operations-go-ai-operations",
+   "location": "IN, TN, Chennai - Virtual",
+   "normalized_location": "Chennai, Tamil Nadu, IND",
+   "posted_date": "October 13, 2026",
+   "preferred_qualifications": "- Work a flexible schedule/shift/work area, including weekends, nights, and/or holidays<br/><br/>Our inclusive culture empowers Amazonians to deliver the best results for our customers. If you have a ",
+   "title": "Associate, ML Data Operations, GO-AI Operations"
+  }
+ ]
+}

@@ -1,0 +1,47 @@
+{
+ "absolute_url": "https://www.observe.ai/position?gh_jid=5432596008",
+ "data_compliance": [
+  {
+   "type": "gdpr",
+   "requires_consent": false,
+   "requires_processing_consent": false,
+   "requires_retention_consent": false,
+   "retention_period": null,
+   "demographic_data_consent_applies": false
+  }
+ ],
+ "internal_job_id": 4523750008,
+ "location": {
+  "name": "Hyderabad, Telangana, India"
+ },
+ "metadata": null,
+ "id": 5432596008,
+ "updated_at": "2026-09-23T06:13:40-04:00",
+ "requisition_id": "1117",
+ "title": "AI Agent Engineer",
+ "company_name": "Observe.AI",
+ "first_published": "2026-09-23T06:13:40-04:00",
+ "language": "en",
+ "application_deadline": null,
+ "content": "&lt;p&gt;&lt;strong&gt;About Us&lt;/strong&gt;&lt;/p&gt;\n&lt;p&gt;&lt;a href=&quot;http://observe.ai/&quot;&gt;Observe.AI&lt;/a&gt; is the AI Agents platform for customer experience, designed to help organizations deliver faster, smarter, and more efficient customer service at scale. The platform enables businesses to deploy specialized AI agents that autonomously execute work across the full CX lifecycle\u2014from handling customer conversations to supporting frontline teams and optimizing operations.&lt;/p&gt;\n&lt;p&gt;Each AI agent is purpose-built for a specific role, equipped to understand context, make decisions, take action, and continuously improve outcomes. This allows organizations to increase resolution speed, elevate service quality, and reduce operational costs while empowering you",
+ "departments": [
+  {
+   "id": 4022589008,
+   "name": "AI Solutions & Deployment ",
+   "child_ids": [],
+   "parent_id": 4022545008
+  }
+ ],
+ "offices": [
+  {
+   "id": 4017578008,
+   "name": "Bengaluru",
+   "location": "Bengaluru, Karnataka, India",
+   "child_ids": [],
+   "parent_id": 4053872008
+  }
+ ],
+ "ai_disclaimer": "<p>We use Greenhouse\u2019s AI-powered Talent Matching tool to compare your application against our job requirements.</p>",
+ "include_ai_disclaimer": true,
+ "ai_opt_out_request_url": "http://app8.greenhouse.io/ai_opt_out_request/job_post/5432596008/ai_opt_out"
+}
