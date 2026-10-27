@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!-- Copy to ~/Library/LaunchAgents/com.hungryhunt.daily.plist, replace /path/to, then:
+     launchctl bootstrap gui/$UID ~/Library/LaunchAgents/com.hungryhunt.daily.plist -->
+<plist version="1.0">
+<dict>
+  <key>Label</key><string>com.hungryhunt.daily</string>
+  <key>ProgramArguments</key>
+  <array><string>/bin/zsh</string><string>/path/to/hungry_hunt/scripts/run_local.sh</string></array>
+  <key>StartCalendarInterval</key>
+  <array>
+    <dict><key>Hour</key><integer>7</integer><key>Minute</key><integer>0</integer></dict>
+    <dict><key>Hour</key><integer>19</integer><key>Minute</key><integer>0</integer></dict>
+  </array>
+  <key>StandardOutPath</key><string>/path/to/Library/Logs/hungry_hunt.launchd.log</string>
+  <key>StandardErrorPath</key><string>/path/to/Library/Logs/hungry_hunt.launchd.log</string>
+</dict>
+</plist>

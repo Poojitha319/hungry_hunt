@@ -2,7 +2,19 @@
 name = "hungry-hunt"
 version = "0.1.0"
 description = "Finds genuine, fresher-fit job openings from company hiring systems and delivers a daily digest."
+readme = "README.md"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Sai Poojitha Sajjavarapu" }]
 requires-python = ">=3.12"
+keywords = ["job-search", "ats", "greenhouse", "lever", "gemini", "agent"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Framework :: FastAPI",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Office/Business",
+]
 dependencies = [
     "httpx>=0.27",
     "pydantic>=2.7",
@@ -18,18 +30,25 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-dev = ["pytest>=8", "pytest-asyncio>=0.23", "respx>=0.21", "ruff>=0.6", "httpx>=0.27"]
+dev = ["pytest>=8", "pytest-asyncio>=0.23", "respx>=0.21", "ruff>=0.6", "httpx>=0.27", "mypy>=1.11", "pre-commit>=3.7"]
 sniff = ["playwright>=1.47"]
 
+[project.urls]
+Repository = "https://github.com/Poojitha319/hungry_hunt"
+Changelog = "https://github.com/Poojitha319/hungry_hunt/blob/main/CHANGELOG.md"
+
+[project.scripts]
+hunt = "hungry_hunt.cli:main"
+
 [build-system]
-requires = ["setuptools>=68"]
+requires = ["setuptools>=77"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
-include = ["hunt*", "web*"]
+where = ["src"]
 
 [tool.setuptools.package-data]
-hunt = ["templates/*.j2"]
+"hungry_hunt.delivery" = ["templates/*.j2"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
@@ -38,9 +57,25 @@ asyncio_mode = "auto"
 [tool.ruff]
 line-length = 120
 target-version = "py312"
+src = ["src", "tests"]
 
 [tool.ruff.lint]
-ignore = ["BLE001", "C408"]
+select = ["E", "F", "I", "B", "UP", "S", "SIM", "C4", "RUF", "PTH", "N", "D100", "D104"]
+ignore = ["E501", "BLE001", "C408", "N817", "N818", "RUF001"]
 
 [tool.ruff.lint.per-file-ignores]
-"web/api/*" = ["B008"]
+"src/hungry_hunt/api/*" = ["B008"]
+"tests/*" = ["S101", "S105", "S106", "D100", "D104"]
+"migrations/*" = ["D100", "D104", "S"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.mypy]
+python_version = "3.12"
+files = ["src"]
+check_untyped_defs = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+no_implicit_optional = true
+ignore_missing_imports = true

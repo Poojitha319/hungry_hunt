@@ -1,0 +1,44 @@
+name: ci
+on:
+  push:
+  pull_request:
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+      - run: uv python install 3.12
+      - run: uv sync --extra dev --frozen
+      - run: uv run ruff check src tests migrations
+      - run: uv run ruff format --check src tests migrations
+      - run: uv run mypy
+      - run: uv run pytest -q
+      - name: openapi.json matches the app
+        run: |
+          uv run python -c "import json,pathlib; from hungry_hunt.api.app import create_app; from hungry_hunt.config import Settings; pathlib.Path('frontend/openapi.json').write_text(json.dumps(create_app(Settings(database_url='sqlite://')).openapi(), indent=1) + '\n')"
+          git diff --exit-code -- frontend/openapi.json
+  frontend:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - run: npm ci
+      - run: npm run lint
+      - run: npm run typecheck
+      - run: npm test
+      - run: npm run build

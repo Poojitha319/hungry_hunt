@@ -8,6 +8,9 @@ digest.html
 .superpowers/
 __pycache__/
 *.egg-info/
-web/ui/node_modules/
-web/ui/dist/
+frontend/node_modules/
+frontend/dist/
 build/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/

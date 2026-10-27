@@ -3,8 +3,8 @@ from datetime import UTC, datetime
 
 import pytest
 
-from hunt.db import Base, make_engine, session_factory
-from hunt.models import Company, Job
+from hungry_hunt.db import Base, make_engine, session_factory
+from hungry_hunt.db.models import Company, Job
 
 
 @pytest.fixture
@@ -29,8 +29,14 @@ def company(session):
 @pytest.fixture
 def job(session, company):
     now = datetime.now(UTC)
-    j = Job(company_id=company.id, external_id="x1", title="SDE I", url="https://jobs.lever.co/hevodata/x1",
-            first_seen=now, last_seen=now)
+    j = Job(
+        company_id=company.id,
+        external_id="x1",
+        title="SDE I",
+        url="https://jobs.lever.co/hevodata/x1",
+        first_seen=now,
+        last_seen=now,
+    )
     session.add(j)
     session.flush()
     return j
@@ -38,5 +44,6 @@ def job(session, company):
 
 @pytest.fixture(autouse=True)
 def public_dns(monkeypatch):
-    from hunt import http
+    from hungry_hunt.core import http
+
     monkeypatch.setattr(http, "resolve", lambda host: {"93.184.216.34"})
