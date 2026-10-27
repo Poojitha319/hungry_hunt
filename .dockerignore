@@ -1,0 +1,16 @@
+.git
+.venv
+.env
+*.db
+__pycache__
+*.egg-info
+.pytest_cache
+.ruff_cache
+.mypy_cache
+.remember
+.superpowers
+frontend
+tests
+docs
+data
+digest.html

@@ -4,7 +4,7 @@ services:
     runtime: python
     plan: free
     buildCommand: pip install .
-    startCommand: uvicorn web.api.app:app --host 0.0.0.0 --port $PORT
+    startCommand: uvicorn hungry_hunt.api.app:app --host 0.0.0.0 --port $PORT
     healthCheckPath: /health
     envVars:
       - key: PYTHON_VERSION
@@ -16,4 +16,6 @@ services:
       - key: REVIEW_BASE_URL
         sync: false
       - key: USER_ID
-        value: poojitha
+        sync: false
+      - key: LOG_FORMAT
+        value: json
