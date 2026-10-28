@@ -19,6 +19,7 @@ All notable changes to this project are documented here. The format follows
 
 ### Removed
 - The heartbeat commit step from the daily workflow.
+- The digest preview artifact from the daily workflow: on a public repo artifacts are downloadable by any signed-in user and the HTML carried review links with the token.
 - `JOB_PRD.docx` (superseded by `docs/PRD.md`).
 
 ## [0.1.0] - 2026-10-15

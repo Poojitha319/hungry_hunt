@@ -108,7 +108,7 @@ flowchart LR
    `python -m hungry_hunt.db.copydb sqlite:///hunt.db "$DATABASE_URL"` if you have local history to keep.
 2. **GitHub Actions.** Secrets: `DATABASE_URL`, `GEMINI_API_KEY`, `SMTP_USER`, `SMTP_PASSWORD`, `DIGEST_TO`,
    `REVIEW_TOKEN`. Variables: `GEMINI_MODEL`, `USER_ID`, `REVIEW_BASE_URL`. Enable `daily` and `discover`,
-   trigger `daily` once by hand and check the run log and the digest artifact. GitHub pauses scheduled workflows
+   trigger `daily` once by hand and check the run log and your inbox. GitHub pauses scheduled workflows
    on public repositories after 60 days without a commit; a separate `keepalive` job in `daily.yml` re-enables
    the schedule through the API so the digest keeps coming.
 3. **API on Render.** `render.yaml` is a blueprint: connect the repo, set the same secrets, health check `/health`.

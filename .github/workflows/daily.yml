@@ -32,15 +32,6 @@ jobs:
       - run: uv run alembic upgrade head
       - name: run pipeline
         run: uv run hunt run
-      - name: digest preview artifact
-        if: always()
-        run: uv run hunt digest --preview digest.html || true
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: digest-${{ github.run_id }}
-          path: digest.html
-          retention-days: 7
   keepalive:
     # GitHub pauses cron schedules on public repos after 60 days without a commit. Re-enabling the workflow
     # through the API resets that clock. Separate job: no secrets in its environment, only the built-in token.
