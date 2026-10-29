@@ -23,8 +23,8 @@ jobs:
       USER_ID: ${{ vars.USER_ID }}
       LOG_FORMAT: json
     steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v6
+      - uses: actions/checkout@v7
+      - uses: astral-sh/setup-uv@v10
         with:
           enable-cache: true
       - run: uv python install 3.12
