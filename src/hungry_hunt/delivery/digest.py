@@ -175,7 +175,7 @@ def build(session: Session, settings: Settings, now: datetime, days: int | None 
     truncated += len(unscored) - len(shown_unscored)
     date_ist = now.astimezone(IST).date()
     return Digest(
-        digest_id=f"{settings.user_id}:{now.astimezone(IST):%Y-%m-%dT%H}",
+        digest_id=f"{settings.user_id}:{now.astimezone(IST):%Y-%m-%d}:{'am' if now.astimezone(IST).hour < 13 else 'pm'}",
         date_ist=date_ist,
         new=new,
         carried=carried,

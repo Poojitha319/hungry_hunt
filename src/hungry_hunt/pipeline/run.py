@@ -6,6 +6,8 @@ from dataclasses import asdict, dataclass, field
 from datetime import UTC, datetime
 from typing import Any
 
+import httpx
+
 from hungry_hunt.adapters import AtsSource
 from hungry_hunt.config import Settings
 from hungry_hunt.core.http import Limits, make_client
@@ -89,6 +91,21 @@ class RunSummary:
 
 
 def run_daily(p: Pipeline) -> RunSummary:
+    out = _run_stages(p)
+    _heartbeat(p.settings.heartbeat_url, out.exit_code)
+    return out
+
+
+def _heartbeat(url: str, exit_code: int) -> None:
+    if not url:
+        return
+    try:
+        httpx.get(url if exit_code == 0 else url.rstrip("/") + "/fail", timeout=10)
+    except Exception as e:
+        log.warning("heartbeat ping failed: %s", e)
+
+
+def _run_stages(p: Pipeline) -> RunSummary:
     import asyncio
 
     out = RunSummary()

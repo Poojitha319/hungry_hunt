@@ -170,3 +170,24 @@ app.
 - Adapters for Darwinbox and Keka; a generic JSON-recipe adapter for one-off careers APIs.
 - WhatsApp delivery alongside email.
 - A weekly summary of where responses come from, which rules drop the most, and what to change.
+
+## Running on time
+
+GitHub's `schedule` trigger is best effort: on this repository scheduled runs have started four to six hours late,
+and the worst delays are at the top and half of each hour. The crons in `daily.yml` (06:47 and 18:47 IST) and
+`discover.yml` are kept only as a fallback. Two things make the digest punctual and safe to re-run:
+
+1. **Exact external trigger.** Any minute-precise cron service can start the workflow through GitHub's dispatch API.
+   With [cron-job.org](https://cron-job.org) (free): create a fine-grained GitHub token for this repository only, with
+   *Actions: read and write*, then two jobs at 07:00 and 19:00 Asia/Kolkata:
+   - URL `https://api.github.com/repos/Poojitha319/hungry_hunt/actions/workflows/daily.yml/dispatches`
+   - Method `POST`, body `{"ref":"main"}`
+   - Headers `Authorization: Bearer <token>`, `Accept: application/vnd.github+json`, `Content-Type: application/json`
+   A Cloudflare Worker with a Cron Trigger making the same request works equally well.
+2. **One digest per slot.** The digest id is `user:YYYY-MM-DD:am|pm` (IST, `pm` from 13:00). If the fallback cron
+   fires after the external trigger already sent the morning email, the second run fetches and scores but `send`
+   sees a confirmed delivery for the same id and skips the email.
+
+**Dead-man's switch.** Set `HEARTBEAT_URL` (GitHub secret and `.env`) to a [healthchecks.io](https://healthchecks.io)
+check with a daily period and a 30-minute grace. `hunt run` pings it on a clean run and `<url>/fail` when a stage
+failed or the email did not go out, so a run that never starts or breaks emails you instead of going unnoticed.

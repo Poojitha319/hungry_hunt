@@ -7,6 +7,7 @@ from dataclasses import dataclass, field
 from datetime import UTC, datetime, timedelta
 
 from sqlalchemy import select
+from sqlalchemy.exc import PendingRollbackError
 from sqlalchemy.orm import Session
 
 from hungry_hunt.adapters import board_url
@@ -257,6 +258,7 @@ async def fetch_all(
             }
             for cid, jobs in existing.items()
         }
+        session.commit()  # release the connection: the gather can outlast the server's idle-in-transaction timeout
         sem = asyncio.Semaphore(settings.fetch_concurrency)
 
         async def one(c):
@@ -275,6 +277,8 @@ async def fetch_all(
                         else lambda s_, c_, l_, n_: apply_board(s_, c_, l_, n_, existing.get(c_.id))
                     )(session, company, listing, now)
             except Exception as e:
+                if isinstance(e, PendingRollbackError) or getattr(e, "connection_invalidated", False):
+                    raise
                 cov.boards_failed += 1
                 cov.errors.append(f"{company.ats}:{company.slug}: {type(e).__name__}: {str(e)[:120]}")
                 continue

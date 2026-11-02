@@ -17,6 +17,11 @@ All notable changes to this project are documented here. The format follows
 - `uv.lock` for reproducible installs; Dockerfile for the API image; Makefile for the common commands.
 - Frontend moved from `web/ui` to `frontend/`.
 
+### Fixed
+- `fetch` no longer holds a database transaction open while every board is fetched over HTTP. The Sunday sweep of
+  all boards outlasted Neon's 5-minute idle-in-transaction timeout, which failed all three runs on 2026-11-01. A lost
+  connection now surfaces with its real cause instead of being counted as a board failure.
+
 ### Removed
 - The heartbeat commit step from the daily workflow.
 - The digest preview artifact from the daily workflow: on a public repo artifacts are downloadable by any signed-in user and the HTML carried review links with the token.

@@ -139,7 +139,7 @@ def test_build_groups_sections_orders_and_links(session):
     )
     mk_job(session, c, "unscored", title="SDE unscored", score=None, verdict=None)
     d = digest.build(session, SETTINGS, NOW)
-    assert d.digest_id == "u:2026-10-07T07" and str(d.date_ist) == "2026-10-07"
+    assert d.digest_id == "u:2026-10-07:am" and str(d.date_ist) == "2026-10-07"
     assert [j.title for j in d.new["India"]] == ["Associate SDE", "SDE I"]
     assert [j.title for j in d.new["Remote"]] == ["Platform Engineer"]
     assert [j.title for j in d.new["Stretch"]] == ["Infra Engineer"]
@@ -306,3 +306,13 @@ def test_preferred_roles_rank_with_junior_titles(session):
     mk_job(session, c, "c", title="Associate SDE", score=90, age_h=2)
     d = digest.build(session, SETTINGS, NOW)
     assert [j.title for j in d.new["India"]] == ["Associate SDE", "AI Engineer", "Backend Engineer"]
+
+
+def test_digest_id_is_per_day_and_slot_so_late_reruns_do_not_resend(session):
+    mk_profile(session)
+    morning = digest.build(session, SETTINGS, NOW)
+    late_morning = digest.build(session, SETTINGS, NOW + timedelta(hours=4))
+    evening = digest.build(session, SETTINGS, NOW + timedelta(hours=12))
+    assert morning.digest_id == "u:2026-10-07:am"
+    assert late_morning.digest_id == morning.digest_id
+    assert evening.digest_id == "u:2026-10-07:pm"

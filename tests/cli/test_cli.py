@@ -310,3 +310,27 @@ def test_run_logs_stage_summary(env, caplog):
 def test_settings_have_logging_fields(env):
     assert env.log_level == "INFO"
     assert env.log_format == "plain"
+
+
+def test_run_daily_pings_heartbeat_with_fail_suffix_on_errors(env, monkeypatch):
+    from hungry_hunt.pipeline import fetch as fetch_stage
+    from hungry_hunt.pipeline import run as run_mod
+    from hungry_hunt.pipeline.run import Pipeline, run_daily
+
+    pinged = []
+    monkeypatch.setattr(run_mod.httpx, "get", lambda url, timeout: pinged.append(url))
+    hb = env.model_copy(update={"heartbeat_url": "https://hc.example/abc"})
+    main(["discover", "add", "lever:hevodata"], settings=hb)
+    main(["profile"], settings=hb, llm=FakeLLM())
+    deps = dict(now=NOW, source=FakeSource(), llm=FakeLLM(), mailer=FakeMailer(), mailbox=FakeMailbox())
+    run_daily(Pipeline(sf(hb), hb, **deps))
+    assert pinged == ["https://hc.example/abc"]
+
+    async def boom(*a, **k):
+        raise RuntimeError("boom")
+
+    monkeypatch.setattr(fetch_stage, "fetch_all", boom)
+    run_daily(Pipeline(sf(hb), hb, **deps))
+    assert pinged[-1] == "https://hc.example/abc/fail"
+    run_daily(Pipeline(sf(env), env, **deps))
+    assert len(pinged) == 2

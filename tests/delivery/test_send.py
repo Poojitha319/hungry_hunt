@@ -163,4 +163,4 @@ def test_run_builds_renders_sends_and_records_run():
     assert "0 new" in subject and "No genuine openings today" in html
     with sf() as s:
         r = s.scalar(select(Run).where(Run.stage == "send"))
-        assert r.stats["sent"] is True and r.stats["jobs"] == 0 and r.stats["digest_id"] == "u:2026-10-07T07"
+        assert r.stats["sent"] is True and r.stats["jobs"] == 0 and r.stats["digest_id"] == "u:2026-10-07:am"

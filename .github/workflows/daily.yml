@@ -1,8 +1,10 @@
 name: daily
 on:
   schedule:
-    - cron: "30 1 * * *"    # 07:00 IST
-    - cron: "30 13 * * *"   # 19:00 IST
+    # Fallback only: GitHub runs cron late (hours, on this repo). The exact trigger is an external
+    # cron calling workflow_dispatch; see docs/OPERATIONS.md. Odd minutes avoid the worst delays.
+    - cron: "17 1 * * *"    # 06:47 IST
+    - cron: "17 13 * * *"   # 18:47 IST
   workflow_dispatch:
 permissions:
   contents: read
@@ -22,6 +24,7 @@ jobs:
       REVIEW_TOKEN: ${{ secrets.REVIEW_TOKEN }}
       USER_ID: ${{ vars.USER_ID }}
       LOG_FORMAT: json
+      HEARTBEAT_URL: ${{ secrets.HEARTBEAT_URL }}
     steps:
       - uses: actions/checkout@v7
       - uses: astral-sh/setup-uv@v10.3.3

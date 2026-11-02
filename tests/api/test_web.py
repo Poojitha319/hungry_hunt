@@ -92,7 +92,7 @@ def test_token_accepted_as_bearer_or_query(api):
 
 def test_digest_payload_matches_schema(api):
     d = api.get("/api/digest", headers=AUTH).json()
-    assert d["digest_id"] == "u:2026-10-07T07"
+    assert d["digest_id"] == "u:2026-10-07:am"
     (job,) = d["new"]["India"]
     assert (job["title"], job["company"], job["score"], job["verdict"]) == ("SDE I", "Hevo Data", 88, "apply")
     assert job["review_url"].startswith("https://ui/job/")

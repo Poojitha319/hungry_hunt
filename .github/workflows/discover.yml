@@ -1,7 +1,7 @@
 name: discover
 on:
   schedule:
-    - cron: "0 20 * * 6"   # Sunday 01:30 IST
+    - cron: "7 20 * * 6"   # Sunday 01:37 IST (odd minute: GitHub runs on-the-hour crons late)
   workflow_dispatch:
 permissions:
   contents: read

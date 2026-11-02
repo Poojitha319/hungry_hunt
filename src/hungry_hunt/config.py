@@ -28,3 +28,4 @@ class Settings(BaseSettings):
     track_require_forwarded: bool = True
     log_level: str = "INFO"
     log_format: str = "plain"
+    heartbeat_url: str = ""

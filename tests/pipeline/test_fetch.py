@@ -1,6 +1,8 @@
 from datetime import UTC, datetime, timedelta
 
-from sqlalchemy import select
+import pytest
+from sqlalchemy import event, select
+from sqlalchemy.exc import PendingRollbackError
 
 from hungry_hunt.config import Settings
 from hungry_hunt.core.http import BoardError
@@ -205,3 +207,50 @@ async def test_member_boards_of_a_feed_are_never_fetched_directly():
         s.commit()
     stats = await fetch.fetch_all(sf, Settings(user_id="u"), FakeSource({}), now=NOW)
     assert stats.boards_total == 0
+
+
+async def test_fetch_all_holds_no_db_connection_while_boards_are_fetched():
+    # Neon kills a connection idle in a transaction for 5 minutes; the Sunday sweep of every board takes longer.
+    engine = make_engine("sqlite://")
+    Base.metadata.create_all(engine)
+    sf = session_factory(engine)
+    with sf() as s:
+        s.add(Company(user_id="u", ats="lever", slug="hevodata", name="Hevo", status="target"))
+        s.commit()
+    checked_out = 0
+    seen_during_fetch = []
+
+    @event.listens_for(engine, "checkout")
+    def _out(*_):
+        nonlocal checked_out
+        checked_out += 1
+
+    @event.listens_for(engine, "checkin")
+    def _in(*_):
+        nonlocal checked_out
+        checked_out -= 1
+
+    class Source(FakeSource):
+        async def list_jobs(self, ats, slug):
+            seen_during_fetch.append(checked_out)
+            return await super().list_jobs(ats, slug)
+
+    stats = await fetch.fetch_all(sf, Settings(user_id="u"), Source({"hevodata": [p("h1")]}), now=NOW)
+    assert stats.jobs_new == 1
+    assert seen_during_fetch == [0]
+
+
+async def test_fetch_all_does_not_swallow_a_lost_db_connection(monkeypatch):
+    engine = make_engine("sqlite://")
+    Base.metadata.create_all(engine)
+    sf = session_factory(engine)
+    with sf() as s:
+        s.add(Company(user_id="u", ats="lever", slug="hevodata", name="Hevo", status="target"))
+        s.commit()
+
+    def lost(*_a, **_k):
+        raise PendingRollbackError("terminating connection due to idle-in-transaction timeout")
+
+    monkeypatch.setattr(fetch, "apply_board", lost)
+    with pytest.raises(PendingRollbackError):
+        await fetch.fetch_all(sf, Settings(user_id="u"), FakeSource({"hevodata": [p("h1")]}), now=NOW)
